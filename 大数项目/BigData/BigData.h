@@ -15,10 +15,19 @@ public:
 	BigData(INT64 value = UN_INIT);
 	BigData(char* strData);
 	BigData operator+(const BigData& bigData);
+	BigData operator-(const BigData& bigData);
+	BigData operator*(const BigData& bigData);
+	BigData operator/(const BigData& bigData);
+
+private:
+
+	bool IsINT64Overflow()const;//const修饰的是this
+	bool IsLeftBig(char* pLeft, int LSize, char* pRight, int RSize);
+	int SubLoop(char* pLeft, int LSize, char* pRight, int RSize);
 	string Add(string left, string right);
 	string Sub(string left, string right);
-private:
-	bool IsINT64Overflow()const;//const修饰的是this
+	string Mul(string left, string right);
+	string Div(string left, string right);
 private:
 	INT64 _value;
 	string _strData;
