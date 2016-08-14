@@ -179,6 +179,12 @@ public:
 	{
 		return _LeafSize(_root);
 	}
+	void PrintFromTopToBottom()
+	{
+		cout << "²ãÐò±éÀú£º";
+		_PrintFromTopToBottom(_root);
+		cout << endl;
+	}
 protected:
 	void _PrevOrder(Node* root)
 	{
@@ -318,6 +324,29 @@ protected:
 		}
 		return _LeafSize(root->_left) + _LeafSize(root->_right);
 	}
+	void _PrintFromTopToBottom(Node* root)
+	{
+		if (root == NULL)
+		{
+			return;
+		}
+		queue<Node *> queueTreeNode;
+		queueTreeNode.push(root);
+		while (!queueTreeNode.empty())
+		{
+			Node* pNode = queueTreeNode.front();
+			if (pNode->_left)
+			{
+				queueTreeNode.push(pNode->_left);
+			}
+			if (pNode->_right)
+			{
+				queueTreeNode.push(pNode->_right);
+			}
+			cout << pNode->_data << " ";
+			queueTreeNode.pop();
+		}
+	}
 protected:
 	Node* _CreateTree(const T* a, size_t size, size_t& index, const T& invalid)
 	{
@@ -366,6 +395,7 @@ void Test()
 	bt1.PostOrder_NonR();
 	bt1.PrevOrder_NonR();
 	size_t ret1=bt1.Depth();
+	bt1.PrintFromTopToBottom();
 	cout << "ret1:" << ret1 << endl;
 	size_t ret2 = bt1.Size();
 	cout << "ret2:" << ret2 << endl;
